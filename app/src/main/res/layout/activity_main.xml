@@ -4,13 +4,51 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- Název aplikace nebo logo -->
     <TextView
-        android:id="@+id/textViewBalance"
+        android:id="@+id/textView_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Balance:"
-        android:textSize="18sp" />
+        android:text="Finance App"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp" />
 
-    <!-- Zde můžete přidat další prvky pro zobrazení informací o účtech a transakcích -->
+    <!-- Pole pro zadání uživatelského jména -->
+    <EditText
+        android:id="@+id/editText_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Uživatelské jméno"
+        android:inputType="text" />
+
+    <!-- Pole pro zadání hesla -->
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Heslo"
+        android:inputType="textPassword"
+        android:layout_below="@id/editText_username"
+        android:layout_marginTop="16dp" />
+
+    <!-- Tlačítko pro přihlášení -->
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Přihlásit se"
+        android:layout_below="@id/editText_password"
+        android:layout_marginTop="32dp" />
+
+    <!-- Tlačítko pro vytvoření nového účtu -->
+    <Button
+        android:id="@+id/button_create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vytvořit nový účet"
+        android:layout_below="@id/button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>

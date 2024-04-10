@@ -6,69 +6,71 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "finance_db";
+    private static final String DATABASE_NAME = "myapp.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Tabulka pro uživatele
+    // Názvy tabulek a sloupců pro tabulku "users"
     public static final String TABLE_USERS = "users";
-    public static final String USER_ID = "id";
-    public static final String USER_USERNAME = "username";
-    public static final String USER_PASSWORD = "password";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_PASSWORD = "password";
 
-    // Tabulka pro účty
+    // Názvy tabulek a sloupců pro tabulku "accounts"
     public static final String TABLE_ACCOUNTS = "accounts";
-    public static final String ACCOUNT_ID = "id";
-    public static final String ACCOUNT_USER_ID = "user_id";
-    public static final String ACCOUNT_TYPE = "type"; // 'debit' or 'savings'
-    public static final String ACCOUNT_BALANCE = "balance";
+    public static final String COLUMN_USER_ID = "user_id";
+    public static final String COLUMN_ACCOUNT_TYPE = "account_type";
+    public static final String COLUMN_BALANCE = "balance";
 
-    // Tabulka pro transakce
+    // Názvy tabulek a sloupců pro tabulku "transactions"
     public static final String TABLE_TRANSACTIONS = "transactions";
-    public static final String TRANSACTION_ID = "id";
-    public static final String TRANSACTION_ACCOUNT_ID = "account_id";
-    public static final String TRANSACTION_AMOUNT = "amount";
-    public static final String TRANSACTION_TYPE = "type"; // 'transfer' or 'payment'
-    public static final String TRANSACTION_DESCRIPTION = "description";
-    public static final String TRANSACTION_PHOTO_PATH = "photo_path";
+    public static final String COLUMN_FROM_ACCOUNT_ID = "from_account_id";
+    public static final String COLUMN_TO_ACCOUNT_ID = "to_account_id";
+    public static final String COLUMN_AMOUNT = "amount";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_PHOTO_PATH = "photo_path";
 
+    // Konstruktor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Metoda pro vytvoření tabulek při vytvoření databáze
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Vytvoření tabulek při vytvoření databáze
-        String createUserTable = "CREATE TABLE " + TABLE_USERS + "("
-                + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + USER_USERNAME + " TEXT,"
-                + USER_PASSWORD + " TEXT"
-                + ")";
-        db.execSQL(createUserTable);
+        // Vytvoření tabulky "users"
+        String createUsersTable = "CREATE TABLE " + TABLE_USERS + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USERNAME + " TEXT, " +
+                COLUMN_PASSWORD + " TEXT)";
+        db.execSQL(createUsersTable);
 
-        String createAccountsTable = "CREATE TABLE " + TABLE_ACCOUNTS + "("
-                + ACCOUNT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ACCOUNT_USER_ID + " INTEGER,"
-                + ACCOUNT_TYPE + " TEXT,"
-                + ACCOUNT_BALANCE + " REAL"
-                + ")";
+        // Vytvoření tabulky "accounts"
+        String createAccountsTable = "CREATE TABLE " + TABLE_ACCOUNTS + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USER_ID + " INTEGER, " +
+                COLUMN_ACCOUNT_TYPE + " TEXT, " +
+                COLUMN_BALANCE + " REAL)";
         db.execSQL(createAccountsTable);
 
-        String createTransactionsTable = "CREATE TABLE " + TABLE_TRANSACTIONS + "("
-                + TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + TRANSACTION_ACCOUNT_ID + " INTEGER,"
-                + TRANSACTION_AMOUNT + " REAL,"
-                + TRANSACTION_TYPE + " TEXT,"
-                + TRANSACTION_DESCRIPTION + " TEXT,"
-                + TRANSACTION_PHOTO_PATH + " TEXT"
-                + ")";
+        // Vytvoření tabulky "transactions"
+        String createTransactionsTable = "CREATE TABLE " + TABLE_TRANSACTIONS + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_FROM_ACCOUNT_ID + " INTEGER, " +
+                COLUMN_TO_ACCOUNT_ID + " INTEGER, " +
+                COLUMN_AMOUNT + " REAL, " +
+                COLUMN_DESCRIPTION + " TEXT, " +
+                COLUMN_PHOTO_PATH + " TEXT)";
         db.execSQL(createTransactionsTable);
     }
 
+    // Metoda pro aktualizaci databáze při změně verze
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Odstranění existujících tabulek při aktualizaci
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTIONS);
+        // Vytvoření tabulek znovu
         onCreate(db);
     }
 }

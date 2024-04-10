@@ -14,6 +14,8 @@ public class LoginActivity extends AppCompatActivity{
 
     private DatabaseManager dbManager;
 
+    private Button createAccountButton; // Deklarace členské proměnné pro tlačítko
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,21 @@ public class LoginActivity extends AppCompatActivity{
                 startActivity(intent);
                 finish(); // Uzavře aktuální aktivitu
             }
+
         });
+
+        createAccountButton = findViewById(R.id.button_create_account); // Inicializace tlačítka
+
+        // Přidání OnClickListeneru k tlačítku pro vytvoření účtu
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tělo metody onClick - zde se provede akce po kliknutí na tlačítko
+                startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
+            }
+        });
+
+
     }
 
     @Override

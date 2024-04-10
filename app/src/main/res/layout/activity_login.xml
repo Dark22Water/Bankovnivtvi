@@ -27,4 +27,15 @@
         android:text="Login"
         android:layout_below="@id/editTextPassword" />
 
+    <Button
+        android:id="@+id/button_create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_below="@+id/buttonLogin"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="459dp"
+        android:text="Vytvořit nový účet" />
+
+
 </RelativeLayout>
