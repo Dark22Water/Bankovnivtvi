@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_home.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView_welcome"
+        android:id="@+id/textView_balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vítejte na hlavní obrazovce!"
-        android:textSize="24sp"
-        android:layout_centerInParent="true" />
+        android:text="Aktuální zůstatek: 0 Kč"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
 
     <Button
-        android:id="@+id/button_logout"
+        android:id="@+id/button_transfer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Odhlásit se"
-        android:layout_below="@id/textView_welcome"
+        android:text="Převod peněz"
+        android:layout_below="@id/textView_balance"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="32dp" />
 
 </RelativeLayout>
